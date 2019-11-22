@@ -1,4 +1,5 @@
 import { Constants } from "../utils/constants";
+import API from "goals-todos-api";
 
 function addTodo(todo) {
   return {
@@ -22,7 +23,7 @@ function toggleTodo(id) {
 export function handleDeleteTodo(todo) {
   return dispatch => {
     dispatch(removeTodo(todo.id));
-    window.API.deleteTodo(todo.id).catch(() => {
+    API.deleteTodo(todo.id).catch(() => {
       dispatch(addTodo(todo));
       alert("There is an error occured ... Please try again !");
     });
@@ -32,7 +33,7 @@ export function handleDeleteTodo(todo) {
 export function handleToggleTodo(id) {
   return dispatch => {
     dispatch(toggleTodo(id));
-    window.API.saveTodoToggle(id).catch(() => {
+    API.saveTodoToggle(id).catch(() => {
       dispatch(toggleTodo(id));
       alert("There is an error occured ... Please try again !");
     });
@@ -41,7 +42,7 @@ export function handleToggleTodo(id) {
 
 export function handleAddTodo(value, emptyInput) {
   return dispatch => {
-    return window.API.saveTodo(value)
+    return API.saveTodo(value)
       .then(todo => {
         dispatch(addTodo(todo));
         emptyInput();
